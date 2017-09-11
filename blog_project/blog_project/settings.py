@@ -26,7 +26,7 @@ SECRET_KEY = 'rw8*5c=4&d(0i+57#3(5$t+3ece%lewt!+=vr@t@l-q+f*cu2='
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '138.128.219.245']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.pang9004.top']
 
 
 # Application definition
