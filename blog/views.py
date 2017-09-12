@@ -3,14 +3,14 @@ import markdown
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from comments.forms import CommentForm
-from .models import Post, Category
+from .models import Post, Category, Tag
 
 
 class IndexView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
-    paginate_by = 1
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -105,10 +105,10 @@ class PostDetailView(DetailView):
         return context
 
 
-class ArchivesView(ListView):
-    model = Post
-    template_name = 'blog/index.html'
-    context_object_name = 'post_list'
+class ArchivesView(IndexView):
+    # model = Post
+    # template_name = 'blog/index.html'
+    # context_object_name = 'post_list'
     def get_queryset(self):
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
@@ -116,11 +116,18 @@ class ArchivesView(ListView):
           created_time__year=year,
           created_time__month=month)
 
-class CategoryView(ListView):
-    model = Post
-    template_name = 'blog/index.html'
-    context_object_name = 'post_list'
+class CategoryView(IndexView):
+    # model = Post
+    # template_name = 'blog/index.html'
+    # context_object_name = 'post_list'
     def get_queryset(self):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super(CategoryView, self).get_queryset().filter(category=cate)
-    
+
+class TagView(IndexView):
+    # model = Post
+    # template_name = 'blog/index.html'
+    # context_object_name = 'post_list'
+    def get_queryset(self):
+        this_tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=this_tag)
