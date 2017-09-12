@@ -95,3 +95,4 @@ media/
 .idea/
 *.sqlite3
 fabfile.py
+whoosh_index/
