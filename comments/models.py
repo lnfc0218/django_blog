@@ -12,5 +12,8 @@ class Comment(models.Model):
 
     post = models.ForeignKey('blog.Post')
 
+    approved = models.BooleanField(default=True)
+
+
     def __str__(self):
         return self.text[:20]

@@ -65,16 +65,20 @@
             <h3>  <span>{{ post.comment_set.count }}</span> comments in total</h3>
             <ul class="comment-list list-unstyled">
                 {% for comment in comment_list %}
-                    <li class="comment-item">
-                        <span class="nickname">{{ comment.name }}</span>
-                        <time class="submit-date"
-                              datetime="{{ comment.created_time }}">{{ comment.created_time }}</time>
-                        <div class="text">
-                            {{ comment.text }}
-                        </div>
-                    </li>
+                    {% if comment.approved %}
+                         <li class="comment-item">
+                            <span class="nickname">{{ comment.name }}</span>
+                            <time class="submit-date"
+                                  datetime="{{ comment.created_time }}">{{ comment.created_time }}</time>
+                            <div class="text">
+                                {{ comment.text }}
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="comment-item">(COMMENTS HIDDEN BY ADMIN)</li>
+                    {% endif %}
                 {% empty %}
-                    NO COMMENTS!
+                    NO COMMENTS FOR NOW :(
                 {% endfor %}
             </ul>
         </div>
